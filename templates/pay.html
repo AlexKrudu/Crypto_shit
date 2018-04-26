@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link href="static/bootstrap.min.css" rel="stylesheet"/>
+    <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+</head>
+<body>
+<div class="container">
+    <nav class="nav">
+      <a class="nav-link active" href="/">Скупщик</a>
+        <a class="nav-link active" href="/wallet">Проверить кошелек</a>
+      <a class="nav-link disabled" href="/pay">Перевод монет</a>
+      <a class="nav-link active" href="#">Топ-10 майнеров</a>
+    </nav>
+    <h1>Переведите ваши монетки другому пользователю!</h1>
+    <form method = "post" action = "/pay">
+         <div class="form-group">
+            <label for="id">Введите ваш id ВКонтакте.</label>
+             <textarea class="form-control" id="id" rows="1" name = "id_send"></textarea></div>
+         <label for="amount">Введите количество монеток, которые вы хотите отправить.</label>
+        <input type="number" name="amount" id="amount">
+        <div class="form-group">
+            <label for="id_get">Введите id ВКонтакте пользователя, которому вы хотите отправить монетки.</label>
+             <textarea class="form-control" id="id_get" rows="1" name = "id_get"></textarea></div>
+    <button type="submit" class="btn btn-outline-danger">Отправить</button>
+    <h3>{{ res }}</h3>
+    </form>
+</div>
+</body>
+</html>

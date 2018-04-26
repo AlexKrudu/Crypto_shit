@@ -13,7 +13,7 @@ def check_hashes(hashes):
     uid = ""
     rest = ""
     for h in hashes:
-        if md5(h.encode('utf8')).hexdigest()[:5] == '00000':  # нашли хеш (здесь проверка для 4-х нулей)
+        if md5(h.encode('utf8')).hexdigest()[:5] != '00000':  # нашли хеш (здесь проверка для 4-х нулей)
             try:
                 uid, rest = h.split('-', maxsplit=1)
             except Exception:
@@ -21,6 +21,9 @@ def check_hashes(hashes):
             if not uid.isdigit():
                 error = False
         else:
+            error = False
+
+        if not db.check_exists(rest):
             error = False
 
         if error:
@@ -56,6 +59,34 @@ def wallet():
         score = db.calculate(id)
 
     return render_template("wallet.html", score = score)
+
+@app.route("/pay", methods=["GET", "POST"])
+def pay():
+    result = ""
+    if request.method == "POST":
+        sender = request.form["id_send"].strip()
+        amount = request.form["amount"].strip()
+        getter = request.form["id_get"].strip()
+        if not sender or not amount or not getter:
+            result = "Заполните все поля ввода"
+
+        if sender == getter and not result:
+            result = "Нельзя отправлять монеты самому себе"
+
+        try:
+            amount = int(amount)
+        except ValueError:
+            amount = 0
+            result = "Некорректная сумма"
+
+        if not result and amount <= 0:
+            result = "Некорректная сумма"
+
+        result = db.handle_transaction(sender, getter, amount, datetime.utcnow())
+
+    return render_template("pay.html", res=result)
+
+
 
 
 if __name__ == "__main__":

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <link href="static/bootstrap.min.css" rel="stylesheet"/>
     <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
@@ -10,8 +11,8 @@
     <nav class="nav">
       <a class="nav-link active" href="/">Скупщик</a>
         <a class="nav-link disabled" href="/wallet">Проверить кошелек</a>
-      <a class="nav-link active" href="#">Link</a>
-      <a class="nav-link active" href="#">Disabled</a>
+      <a class="nav-link active" href="/pay">Перевод монет</a>
+      <a class="nav-link active" href="#">Топ-10 майнеров</a>
     </nav>
     <h1>Узнайте ваш баланс!</h1>
     <form method = "post" action = "/wallet">
@@ -23,7 +24,6 @@
         <h3>Ваш баланс: {{ score }} монет</h3>
 
     </form>
-
 
 </div>
 </body>
