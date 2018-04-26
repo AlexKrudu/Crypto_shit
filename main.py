@@ -13,7 +13,7 @@ def check_hashes(hashes):
     uid = ""
     rest = ""
     for h in hashes:
-        if md5(h.encode('utf8')).hexdigest()[:5] != '00000':  # нашли хеш (здесь проверка для 4-х нулей)
+        if md5(h.encode('utf8')).hexdigest()[:5] == '00000':  # нашли хеш (здесь проверка для 4-х нулей)
             try:
                 uid, rest = h.split('-', maxsplit=1)
             except Exception:
