@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="static/bootstrap.min.css" rel="stylesheet"/>
+    <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+
+</head>
+<body>
+<div class = "container">
+    <h1>Регистируй хэши и получай монеты!</h1>
+    <form method = "post" action = "/">
+        <div class="form-group">
+            <label for="hashes">Введите строки</label>
+            <textarea class="form-control" id="hashes" rows="3" name = "hashes"></textarea>
+        </div>
+        <button type="submit" class="btn btn-outline-danger">Отправить</button>
+        {% if res %}
+            <h3>Обработаны ключи:</h3>
+            <ul class = "list-group">
+                {% for string, bool in res %}
+                    <li class = "list-group-item">
+                        {% if bool %}
+                        {{ string }} -  OK
+                        {% else %}
+                        {{ string }} - WA
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+
+        {% endif %}
+    </form>
+</div>
+</body>
+</html>
