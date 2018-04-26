@@ -86,6 +86,10 @@ def pay():
 
     return render_template("pay.html", res=result)
 
+@app.route("/top", methods=["GET"])
+def top():
+    return render_template("top.html", res = db.build_top())
+
 
 
 

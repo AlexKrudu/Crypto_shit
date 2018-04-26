@@ -5,6 +5,7 @@
     <link href="static/bootstrap.min.css" rel="stylesheet"/>
     <link href="/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
+    <title>Майнинг</title>
 
 </head>
 <body>
@@ -13,12 +14,12 @@
       <a class="nav-link disabled" href="/">Скупщик</a>
         <a class="nav-link active" href="/wallet">Проверить кошелек</a>
       <a class="nav-link active" href="/pay">Перевод монет</a>
-      <a class="nav-link active" href="#">Топ-10 майнеров</a>
+      <a class="nav-link active" href="/top">Топ-10 майнеров</a>
     </nav>
     <h1>Регистируй хэши и получай монеты!</h1>
     <form method = "post" action = "/">
         <div class="form-group">
-            <label for="hashes">Введите строки</label>
+            <label for="hashes">Введите строки формата "id VK"-"кусок" , md5 которых начинается с 00000</label>
             <textarea class="form-control" id="hashes" rows="3" name = "hashes"></textarea>
         </div>
         <button type="submit" class="btn btn-outline-danger">Отправить</button>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">>
+    <link href="static/bootstrap.min.css" rel="stylesheet"/>
+    <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+    <title>Топ майнеров</title>
+</head>
+<body>
+<div class="container">
+    <nav class="nav">
+      <a class="nav-link active" href="/">Скупщик</a>
+        <a class="nav-link active" href="/wallet">Проверить кошелек</a>
+      <a class="nav-link active" href="/pay">Перевод монет</a>
+      <a class="nav-link disabled" href="/top">Топ-10 майнеров</a>
+    </nav>
+    <h1>Топ 10 майнеров!</h1>
+     <ul class = "list-group">
+                {% for place, person, score in res %}
+                    <li class = "list-group-item">
+                        {{ place }}. {{ person }} : {{ score }}
+                    </li>
+                {% endfor %}
+            </ul>
+</div>
+</body>
+</html>

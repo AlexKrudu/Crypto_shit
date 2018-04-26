@@ -1,4 +1,5 @@
 import pymongo
+import requests
 
 
 client = pymongo.MongoClient("localhost", 27017)
@@ -45,6 +46,20 @@ def handle_transaction(sender, getter, amount, time):
 
     return "Перевод успешно состоялся!"
 
+def get_vk_name(id):
+    server = "https://api.vk.com/method/users.get"
+    params = {"user_ids": str(id),
+              "v": "5.74"}
 
+    try:
+        answer = requests.get(server, params=params).json()["response"][0]
+        return " ".join((answer["first_name"], answer["last_name"]))
+    except:
+        return "Не удалось найти информацию"
+
+def build_top():
+    res = coin.aggregate([{'$group': {'_id': '$user', 'total': {'$sum': 1}}}, {'$sort': {'total': -1}}])
+    res = list(res)[:10]
+    return [(i + 1, get_vk_name(res[i]["_id"]), res[i]["total"]) for i in range(len(res))]
 
 
