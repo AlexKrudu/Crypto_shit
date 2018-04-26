@@ -23,7 +23,7 @@ def check_hashes(hashes):
         else:
             error = False
 
-        if not error:
+        if error:
             db.coin.insert_one(
                 {
                     "string": rest,
@@ -32,7 +32,7 @@ def check_hashes(hashes):
                 }
             )
         result.append((h, error))
-
+        print(list(db.coin.find()))
 
     return result
 
@@ -47,6 +47,16 @@ def index():
     # Сделать функцию check_hashes
 
     return render_template("index.html", res=result)
+
+@app.route("/wallet", methods=["GET", "POST"])
+def wallet():
+    score = 0
+    if request.method == "POST":
+        id = request.form["id"].strip()
+        score = db.calculate(id)
+
+    return render_template("wallet.html", score = score)
+
 
 if __name__ == "__main__":
     app.run(port=8080,host="localhost")

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="static/bootstrap.min.css" rel="stylesheet"/>
+    <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+</head>
+<body>
+<div class="container">
+    <nav class="nav">
+      <a class="nav-link active" href="/">Скупщик</a>
+        <a class="nav-link disabled" href="/wallet">Проверить кошелек</a>
+      <a class="nav-link active" href="#">Link</a>
+      <a class="nav-link active" href="#">Disabled</a>
+    </nav>
+    <h1>Узнайте ваш баланс!</h1>
+    <form method = "post" action = "/wallet">
+        <div class="form-group">
+            <label for="id">Введите ваш id ВКонтакте.</label>
+            <textarea class="form-control" id="id" rows="1" name = "id"></textarea>
+        </div>
+        <button type="submit" class="btn btn-outline-danger">Отправить</button>
+        <h3>Ваш баланс: {{ score }} монет</h3>
+
+    </form>
+
+
+</div>
+</body>
+</html>
