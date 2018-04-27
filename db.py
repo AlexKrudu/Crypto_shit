@@ -1,5 +1,7 @@
 import pymongo
 import requests
+from hashlib import md5
+from datetime import datetime
 
 
 client = pymongo.MongoClient("localhost", 27017)
@@ -46,16 +48,17 @@ def handle_transaction(sender, getter, amount, time):
 
     return "Перевод успешно состоялся!"
 
+
 def get_vk_name(id):
     server = "https://api.vk.com/method/users.get"
     params = {"user_ids": str(id),
               "v": "5.74"}
-
     try:
         answer = requests.get(server, params=params).json()["response"][0]
         return " ".join((answer["first_name"], answer["last_name"]))
     except:
         return "Не удалось найти информацию"
+
 
 def build_top():
     res = coin.aggregate([{'$group': {'_id': '$user', 'total': {'$sum': 1}}}, {'$sort': {'total': -1}}])
@@ -63,3 +66,34 @@ def build_top():
     return [(i + 1, get_vk_name(res[i]["_id"]), res[i]["total"]) for i in range(len(res))]
 
 
+def check_hashes(hashes):
+    result = []
+    error = True
+    uid = ""
+    rest = ""
+    for h in hashes:
+        if md5(h.encode('utf8')).hexdigest()[:5] == '00000':  # нашли хеш (здесь проверка для 4-х нулей)
+            try:
+                uid, rest = h.split('-', maxsplit=1)
+            except Exception:
+                error = False
+            if not uid.isdigit():
+                error = False
+        else:
+            error = False
+
+        if not check_exists(rest):
+            error = False
+
+        if error:
+            coin.insert_one(
+                {
+                    "string": rest,
+                    "time": datetime.utcnow(),
+                    "user": uid,
+                }
+            )
+        result.append((h, error))
+        print(list(coin.find()))
+
+    return result
