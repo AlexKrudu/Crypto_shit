@@ -24,10 +24,8 @@ def index():
 
 @app.route("/wallet", methods=["GET", "POST"])
 def wallet():
-    score = 0
-    if request.method == "POST":
-        id = request.form["id"].strip()
-        score = db.calculate(id)
+    id = request.args.get("id")
+    score = db.calculate(id)
 
     return render_template("wallet.html", score=score)
 

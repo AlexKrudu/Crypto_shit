@@ -12,7 +12,7 @@ log = client.database.logs
 
 def calculate(user_id):
     result = coin.find({"user": {"$eq": user_id}}).count()
-    return result if result else "0"
+    return result if result else False
 
 
 def check_exists(rest):

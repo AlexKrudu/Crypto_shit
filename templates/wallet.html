@@ -16,13 +16,15 @@
       <a class="nav-link active" href="/top">Топ-10 майнеров</a>
     </nav>
     <h1>Узнайте ваш баланс!</h1>
-    <form method = "post" action = "/wallet">
+    <form method = "get" action = "/wallet">
         <div class="form-group">
             <label for="id">Введите ваш id ВКонтакте.</label>
             <textarea class="form-control" id="id" rows="1" name = "id"></textarea>
         </div>
         <button type="submit" class="btn btn-outline-danger">Отправить</button>
+        {% if score %}
         <h3>Ваш баланс: {{ score }} монет</h3>
+        {% endif %}
 
     </form>
 
