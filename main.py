@@ -27,7 +27,8 @@ def wallet():
     correct = True
     id = request.args.get("id")
     score = db.calculate(id)
-    if db.get_vk_name(id) == "Не удалось найти информацию":
+    correct = db.get_vk_name(id)
+    if correct == "Не удалось найти информацию":
         score = "Некорректный id"
         correct = False
 
