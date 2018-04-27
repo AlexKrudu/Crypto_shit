@@ -25,7 +25,7 @@ def check_exists(rest):
 def handle_transaction(sender, getter, amount, time):
     if not sender or not amount or not getter:
         return "Убедитесь в корректности введенных данных"
-
+    amount = int(amount)
     if sender == getter:
         return "Нельзя отправлять монеты самому себе"
     if amount <= 0:
@@ -38,14 +38,12 @@ def handle_transaction(sender, getter, amount, time):
     for i in coins_id:
         coin.update({"_id": i}, {"$set": {"user": getter}})
 
-        log.insert_one(
-            {
+        insert_db(log, {
                 "coin": i,
                 "from": sender,
                 "to": getter,
                 "time": time
-            })
-
+            } )
     return "Перевод успешно состоялся!"
 
 
@@ -64,6 +62,9 @@ def build_top(num):
     res = coin.aggregate([{'$group': {'_id': '$user', 'total': {'$sum': 1}}}, {'$sort': {'total': -1}}])
     res = list(res)[:num]
     return [(get_vk_name(res[i]["_id"]), res[i]["total"]) for i in range(len(res))]
+
+def insert_db(name, value):
+    name.insert_one(value)
 
 
 def check_hashes(hashes):
@@ -86,13 +87,11 @@ def check_hashes(hashes):
             error = False
 
         if error:
-            coin.insert_one(
-                {
+            insert_db(coin, {
                     "string": rest,
                     "time": datetime.utcnow(),
                     "user": uid,
-                }
-            )
+                })
         result.append((h, error))
         print(list(coin.find()))
 

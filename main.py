@@ -24,10 +24,14 @@ def index():
 
 @app.route("/wallet", methods=["GET", "POST"])
 def wallet():
+    correct = True
     id = request.args.get("id")
     score = db.calculate(id)
+    if db.get_vk_name(id) == "Не удалось найти информацию":
+        score = "Некорректный id"
+        correct = False
 
-    return render_template("wallet.html", score=score)
+    return render_template("wallet.html", score=score, correct=correct)
 
 
 @app.route("/pay", methods=["GET", "POST"])
