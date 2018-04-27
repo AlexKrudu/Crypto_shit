@@ -60,10 +60,10 @@ def get_vk_name(id):
         return "Не удалось найти информацию"
 
 
-def build_top():
+def build_top(num):
     res = coin.aggregate([{'$group': {'_id': '$user', 'total': {'$sum': 1}}}, {'$sort': {'total': -1}}])
-    res = list(res)[:10]
-    return [(i + 1, get_vk_name(res[i]["_id"]), res[i]["total"]) for i in range(len(res))]
+    res = list(res)[:num]
+    return [(get_vk_name(res[i]["_id"]), res[i]["total"]) for i in range(len(res))]
 
 
 def check_hashes(hashes):

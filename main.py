@@ -44,7 +44,17 @@ def pay():
 
 @app.route("/top", methods=["GET"])
 def top():
-    return render_template("top.html", res=db.build_top())
+    return render_template("top.html", res=db.build_top(10))
+
+
+@app.route("/top5", methods=["GET"])
+def top5():
+    return render_template("top5.html", res=db.build_top(5))
+
+
+@app.route("/top20", methods=["GET"])
+def top20():
+    return render_template("top20.html", res=db.build_top(20))
 
 
 if __name__ == "__main__":
