@@ -24,8 +24,9 @@
         <button type="submit" class="btn btn-outline-danger">Отправить</button>
         {% if score and correct %}
         <h3>Баланс пользователя {{ correct }}: {{ score }} монет</h3>
-        {% else %}
-        <h3>{{ score }}</h3>
+        {% endif %}
+        {% if not correct %}
+        <h3>{{ verdict }}</h3>
         {% endif %}
 
     </form>
