@@ -25,6 +25,9 @@
         {% if score and correct %}
         <h3>Баланс пользователя {{ correct }}: {{ score }} монет</h3>
         {% endif %}
+        {% if not score and correct%}
+        <h3>Баланс пользователя {{ correct }} пуст!</h3>
+        {% endif %}
         {% if not correct %}
         <h3>{{ verdict }}</h3>
         {% endif %}
