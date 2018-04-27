@@ -1,10 +1,16 @@
 from flask import Flask
-from flask import render_template, request
+import os
+from flask import render_template, request, send_from_directory
 from datetime import datetime
 import db
 
 app = Flask(__name__)
 
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 @app.route("/", methods=["GET", "POST"])
 def index():
