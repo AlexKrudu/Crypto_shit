@@ -23,10 +23,10 @@
         </div>
         <button type="submit" class="btn btn-outline-danger">Отправить</button>
         {% if score and correct %}
-        <h3>Баланс пользователя {{ correct }}: {{ score }} монет</h3>
+        <h3>Баланс пользователя {{ verdict }}: {{ score }} монет</h3>
         {% endif %}
         {% if not score and correct%}
-        <h3>Баланс пользователя {{ correct }} пуст!</h3>
+        <h3>Баланс пользователя {{ verdict }} пуст!</h3>
         {% endif %}
         {% if not correct %}
         <h3>{{ verdict }}</h3>
