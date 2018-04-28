@@ -22,7 +22,7 @@ def index():
     return render_template("index.html", res=result)
 
 
-@app.route("/wallet", methods=["GET", "POST"])
+@app.route("/wallet")
 def wallet():
     correct = True
     id = request.args.get("id")
@@ -50,17 +50,17 @@ def pay():
     return render_template("pay.html", res=result)
 
 
-@app.route("/top", methods=["GET"])
+@app.route("/top")
 def top():
     return render_template("top.html", res=db.build_top(10))
 
 
-@app.route("/top5", methods=["GET"])
+@app.route("/top5")
 def top5():
     return render_template("top5.html", res=db.build_top(5))
 
 
-@app.route("/top20", methods=["GET"])
+@app.route("/top20")
 def top20():
     return render_template("top20.html", res=db.build_top(20))
 
