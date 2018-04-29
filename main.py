@@ -12,6 +12,7 @@ def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
                                'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     result = []
@@ -52,17 +53,17 @@ def pay():
 
 @app.route("/top")
 def top():
-    return render_template("top.html", res=db.build_top(10))
+    return render_template("top.html", res=db.build_top(10), num=10)
 
 
 @app.route("/top5")
 def top5():
-    return render_template("top5.html", res=db.build_top(5))
+    return render_template("top.html", res=db.build_top(5), num=5)
 
 
 @app.route("/top20")
 def top20():
-    return render_template("top20.html", res=db.build_top(20))
+    return render_template("top.html", res=db.build_top(20), num=20)
 
 
 if __name__ == "__main__":
